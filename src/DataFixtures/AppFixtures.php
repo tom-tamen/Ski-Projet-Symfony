@@ -51,24 +51,28 @@ class AppFixtures extends Fixture
 
 
         $transportModes = array("Tapis roulant" , "Tire-fesses","Les télésièges","Les télécabines", "Les téléphériques","Les funiculaires");
-
+        
         foreach($stations as $station){
-            $difficulties = array ("Facile", "Facile/Moyen","Moyen","Difficile","Très Difficile");
-            foreach(['La verte', 'La bleu', 'La rouge' , 'La Noire', 'La Double Noire'] as $name){
-            $slope = new Slope();
-            $slope->setName($name);
-            $slope->setStation($station);
-            $slope->setDifficulty(array_shift($difficulties));
-            $slope->setIsOpen(TRUE);
-            $slope->setDescription("Meilleur Piste");
-            $slope->setType((rand(0, 1) == 1) ? "alpines" : "nordiques");
-            $slope->setGrade(rand(1,5));
-            $randomSeconds = rand(0, 900);
-            $duration = new \DateTime("today + $randomSeconds seconds");
-            $slope->setDuration($duration);
-            $slope->setPeople(rand(1000,10000));
-            $slope->setQuality(rand(1,5));
-            $manager->persist($slope);
+            $difficulties = array ("Verte", "Bleu","Rouge","Noir","Double Noir");
+            $nameslope = ["Beaufortaine","Ecureuils","Choucas","Hirondelles","Chamois","Girolles","Perdrix","Lezette","Barme","Trolliers","Thuile","Renard","Reguet","Les Prés"];
+            $namelift = ['Vores',"Plan Des Fours" , "Bellasta","Ban Rouge","Evettes","Reguet","Lachat","Logère"];
+            for ($i = 1; $i <= 5; $i++){   
+                $slope = new Slope();
+                $slope->setStation($station);
+                $slope->setDifficulty($difficulties[rand(0,4)]);
+                $random = rand(0, count($nameslope) - 1);
+                $slope->setName($nameslope[$random]);
+                array_splice($nameslope, $random, 1);
+                $slope->setIsOpen(TRUE);
+                $slope->setDescription("Meilleur Piste");
+                $slope->setType((rand(0, 1) == 1) ? "alpines" : "nordiques");
+                $slope->setGrade(rand(1,5));
+                $randomSeconds = rand(100, 900);
+                $duration = new \DateTime("today + $randomSeconds seconds");
+                $slope->setDuration($duration);
+                $slope->setPeople(rand(1000,10000));
+                $slope->setQuality(rand(1,5));
+                $manager->persist($slope);
             };
             for($i = 1; $i <=5; $i++){
                 $question = ['Comment puis-je louer du matériel de ski ?',"Comment puis-je acheter un forfait de ski ?","Comment puis-je trouver le chemin le plus court pour descendre de la montagne ?","Comment puis-je éviter les foules sur les pistes ?","Comment puis-je savoir si les pistes sont ouvertes ou fermées ?","Comment puis-je me réchauffer si j'ai froid ?","Comment puis-je éviter les blessures en ski ?","Comment puis-je trouver un moniteur de ski pour m'apprendre à skier ?"];
@@ -83,9 +87,11 @@ class AppFixtures extends Fixture
                 $manager->persist($faq);
             }
             
-            for ($i = 1; $i <= 5; $i++) {
+            for ($i = 1; $i <= 3; $i++) {
                 $lift = new Lift();
-                $lift->setName("Remonté ".$i);
+                $random = rand(0, count($namelift) - 1);
+                $lift->setName($namelift[$random]);
+                array_splice($namelift, $random, 1);
                 $lift->setStation($station);
                 $lift->setType($transportModes[array_rand($transportModes)]);
                 $open = new \DateTime("today + 28800 seconds");
@@ -93,7 +99,7 @@ class AppFixtures extends Fixture
                 $lift->setOpen($open);
                 $lift->setClose($close);
                 $lift->setDescription("Super remonté");
-                $randomSeconds = rand(0, 900);
+                $randomSeconds = rand(100, 900);
                 $duration = new \DateTime("today + $randomSeconds seconds");
                 $lift->setDuration($duration);
                 $lift->setGrade(rand(1,5));
