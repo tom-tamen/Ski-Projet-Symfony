@@ -34,10 +34,14 @@ class Station
     #[ORM\OneToMany(mappedBy: 'station', targetEntity: Lift::class)]
     private Collection $lifts;
 
+    #[ORM\OneToMany(mappedBy: 'station', targetEntity: Faq::class)]
+    private Collection $faqs;
+
     public function __construct()
     {
         $this->slopes = new ArrayCollection();
         $this->lifts = new ArrayCollection();
+        $this->faqs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -147,6 +151,36 @@ class Station
             // set the owning side to null (unless already changed)
             if ($lift->getStation() === $this) {
                 $lift->setStation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Faq>
+     */
+    public function getFaqs(): Collection
+    {
+        return $this->faqs;
+    }
+
+    public function addFaq(Faq $faq): self
+    {
+        if (!$this->faqs->contains($faq)) {
+            $this->faqs->add($faq);
+            $faq->setStation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFaq(Faq $faq): self
+    {
+        if ($this->faqs->removeElement($faq)) {
+            // set the owning side to null (unless already changed)
+            if ($faq->getStation() === $this) {
+                $faq->setStation(null);
             }
         }
 

@@ -32,6 +32,18 @@ class Slope
     #[ORM\ManyToOne(inversedBy: 'slopes')]
     private ?Station $station = null;
 
+    #[ORM\Column]
+    private ?float $grade = null;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $duration = null;
+
+    #[ORM\Column]
+    private ?int $people = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $quality = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +117,54 @@ class Slope
     public function setStation(?Station $station): self
     {
         $this->station = $station;
+
+        return $this;
+    }
+
+    public function getGrade(): ?float
+    {
+        return $this->grade;
+    }
+
+    public function setGrade(float $grade): self
+    {
+        $this->grade = $grade;
+
+        return $this;
+    }
+
+    public function getDuration(): ?\DateTimeInterface
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(\DateTimeInterface $duration): self
+    {
+        $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function getPeople(): ?int
+    {
+        return $this->people;
+    }
+
+    public function setPeople(int $people): self
+    {
+        $this->people = $people;
+
+        return $this;
+    }
+
+    public function getQuality(): ?string
+    {
+        return $this->quality;
+    }
+
+    public function setQuality(string $quality): self
+    {
+        $this->quality = $quality;
 
         return $this;
     }
