@@ -71,7 +71,8 @@ class AppFixtures extends Fixture
                 $duration = new \DateTime("today + $randomSeconds seconds");
                 $slope->setDuration($duration);
                 $slope->setPeople(rand(1000,10000));
-                $slope->setQuality(rand(1,5));
+                $qualities = array ("Mauvais état", "Etat moyen", "Bon état");
+                $slope->setQuality($qualities[array_rand($qualities)]);
                 $manager->persist($slope);
             };
             for($i = 1; $i <=5; $i++){
