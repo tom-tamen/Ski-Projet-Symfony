@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ChallengeController!{% endblock %}
+
+{% block body %}
+
+    {% for challenge in challenges %}
+        <h1>{{ challenge.name }}</h1>
+        <img src="{{ challenge.imgUrl }}">
+        <p>{{ challenge.description }}</p>
+    {% endfor %}
+
+{% endblock %}
