@@ -55,6 +55,16 @@
                     <h3>{{ slope.duration|date("i:s") }}</h3>
                 </div>
                 <p>{{ slope.description }}</p>
+                <div class="flex align-middle justify-between">
+                    <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/star.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>{{ slope.grade }}</p></div>
+                    <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/people.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>{{ slope.people }}</p></div>
+                    <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/quality.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>{{ slope.quality }}</p></div>
+                    {% if slope.isOpen == 1 %}
+                    <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/open.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>Ouvert</p></div>
+                    {% else %}
+                    <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/close.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>Fermée</p></div>
+                    {% endif %}
+                </div>
             </div>
         </div>
         {% endfor %}
