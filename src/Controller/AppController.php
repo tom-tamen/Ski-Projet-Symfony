@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AppController extends AbstractController
 {
-    #[Route('/', name: 'domain_show')]
+    #[Route('/', name: 'app_app')]
     public function index(DomainRepository $domainRepository): Response
     {
         return $this->render('app/index.html.twig', [
