@@ -3,7 +3,7 @@
 {% block title %}Hello AppController!{% endblock %}
 
 {% block body %}
-    <h1>Domaines</h1>
+    <h1 class="text-mainBlue text-desktopXL">Domaines</h1>
     {% for domain in domains %}
         <a href="{{ path('domain_show', {'id':domain.id}) }}">
             <img src="{{ domain.imgUrl }}" alt="{{ domain.name }}">
