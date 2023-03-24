@@ -9,7 +9,7 @@
     <section class="text-mobileBase flex flex-col justify-center">
         <div class="flex flex-row justify-between py-7 px-5">
             <a href="#" onclick="history.back()">
-                <img src="{{ asset('images/pistes/arrowLeft.png') }}">
+                <img src="{{ asset('assets/images/pistes/arrowLeft.png') }}">
             </a>
             <h1 class="text-mobileXL text-titleBlue">
                 {{ station.name }}
@@ -23,7 +23,7 @@
         <form action="" class="flex flex-row justify-between gap-2 mx-5 my-7">
             <div class="border-2 border-black rounded-xl p-1 flex flex-row">
                 <input type="text" class="w-full">
-                <img src="{{ asset('images/pistes/search.svg') }}" alt="" class="px-2">
+                <img src="{{ asset('assets/images/pistes/search.svg') }}" alt="" class="px-2">
             </div>
             <select name="" id="" class="border-2 border-black rounded-xl p-1">
                 <option value="">Filtrer</option>
@@ -37,24 +37,49 @@
             </select>
         </form>
     </section>
-    <section>
-        <h2 style="color: red">Les pistes :</h2>
+    <section class="flex flex-col gap-5">
         {% for slope in station.slopes %}
-        <div class="bg-CustomWhite mx-5 rounded-xl border-b-2 border-mainBlue align-middle flex py-3 px-2 justify-between">
-            <div class="flex flex-row">
-                <img src="{{ asset('images/pistes/search.svg') }}" alt="">
-                <h2>{{ slope.name }}</h2>
+        <div class="bg-CustomWhite mx-5 rounded-xl border-b-2 border-mainBlue align-middle flex flex-col py-3 px-3 menu" onclick="toggleDiv(this)">
+            <div class="flex flex-row justify-between">
+                <div class="flex flex-row">
+                    <img src="{{ asset('assets/images/pistes/search.svg') }}" alt="">
+                    <h2>{{ slope.name }}</h2>
+                </div>
+                <button>
+                    <img src="{{ asset('assets/images/pistes/arrowOpen.png') }}" alt="" class="arrow" style="display: inline-block; transform: rotate(-90deg); transition: transform 0.2s;">
+                </button>
             </div>
-            <button>
-                <img src="{{ asset('images/pistes/arrowOpen.png') }}" alt="">
-            </button>
-        </div><p>{{ slope.description }}</p>
+            <div class="hidden-content" style="display: none">
+                <div class="flex flex-row justify-between">
+                    <h2 class="font-bold">{{ slope.type }}</h2>
+                    <h3>{{ slope.duration|date("i:s") }}</h3>
+                </div>
+                <p>{{ slope.description }}</p>
+            </div>
+        </div>
         {% endfor %}
+        <script>
+            function toggleDiv(div) {
+                var contentDiv = div.querySelector('.hidden-content');
+                var arrowDiv = div.querySelector('.arrow');
+                if (contentDiv.style.display === 'none') {
+                    // Afficher la div supplémentaire et agrandir la div
+                    contentDiv.style.display = 'block';
+                    arrowDiv.style.transform = 'rotate(0deg)'; // Ajouter la rotation de 90 degrés à la flèche
+                } else {
+                    // Cacher la div supplémentaire et réduire la div à sa taille originale
+                    contentDiv.style.display = 'none';
+                    arrowDiv.style.transform = 'rotate(-90deg)'; // Réinitialiser la rotation de la flèche
+                }
+            }
+        </script>
     </section>
+    <!--
     <h2 style="color: red">Les remontées :</h2>
     {% for lift in station.lifts %}
         <h2>{{ lift.name }}</h2>
         <p>{{ lift.description }}</p>
     {% endfor %}
+    -->
 
 {% endblock %}
