@@ -3,15 +3,54 @@
 {% block title %}Hello StationController!{% endblock %}
 
 {% block body %}
-
-
-
-    <h1>{{ station.name }}</h1>
-    <h2 style="color: red">Les pistes :</h2>
-    {% for slope in station.slopes %}
-        <h2>{{ slope.name }}</h2>
-        <p>{{ slope.description }}</p>
-    {% endfor %}
+    <header class="bg-black h-[63px]">
+        <p>Test</p>
+    </header>
+    <section class="text-mobileBase flex flex-col justify-center">
+        <div class="flex flex-row justify-between py-7 px-5">
+            <a href="#" onclick="history.back()">
+                <img src="{{ asset('images/pistes/arrowLeft.png') }}">
+            </a>
+            <h1 class="text-mobileXL text-titleBlue">
+                {{ station.name }}
+            </h1>
+            <div>
+            </div>
+        </div>
+        <a href="{{ path('app_challenge') }}" class="text-center bg-CustomWhite py-2 mx-5 mt-2">
+            Venez découvrir notre défi du jour
+        </a>
+        <form action="" class="flex flex-row justify-between gap-2 mx-5 my-7">
+            <div class="border-2 border-black rounded-xl p-1 flex flex-row">
+                <input type="text" class="w-full">
+                <img src="{{ asset('images/pistes/search.svg') }}" alt="" class="px-2">
+            </div>
+            <select name="" id="" class="border-2 border-black rounded-xl p-1">
+                <option value="">Filtrer</option>
+                <option value=""></option>
+                <option value="">Pistes</option>
+                <option value="">Remontées</option>
+                <option value="">Piste verte</option>
+                <option value="">Piste bleue</option>
+                <option value="">Piste rouge</option>
+                <option value="">Piste noire</option>
+            </select>
+        </form>
+    </section>
+    <section>
+        <h2 style="color: red">Les pistes :</h2>
+        {% for slope in station.slopes %}
+        <div class="bg-CustomWhite mx-5 rounded-xl border-b-2 border-mainBlue align-middle flex py-3 px-2 justify-between">
+            <div class="flex flex-row">
+                <img src="{{ asset('images/pistes/search.svg') }}" alt="">
+                <h2>{{ slope.name }}</h2>
+            </div>
+            <button>
+                <img src="{{ asset('images/pistes/arrowOpen.png') }}" alt="">
+            </button>
+        </div><p>{{ slope.description }}</p>
+        {% endfor %}
+    </section>
     <h2 style="color: red">Les remontées :</h2>
     {% for lift in station.lifts %}
         <h2>{{ lift.name }}</h2>
