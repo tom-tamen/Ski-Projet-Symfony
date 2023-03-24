@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DomainController!{% endblock %}
+
+{% block body %}
+
+
+    <h1>Les station du domaine : {{ domain.name }}</h1>
+    {% for station in domain.stations %}
+        <a href="{{ path('station_show', {'id': station.id}) }}">
+            <img src="{{ station.imgUrl }}" alt="{{ station.name }}">
+            <h2>{{ station.name }}</h2>
+        </a>
+    {% endfor %}
+
+
+{% endblock %}
