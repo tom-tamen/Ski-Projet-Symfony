@@ -28,7 +28,11 @@ class AppFixtures extends Fixture
         foreach(["Espace Diamant","Les 3 vallées"] as $name){
             $domain = new Domain();
             $domain->setName($name);
-            $domain->setImgUrl("https://picsum.photos/200/300");
+            if ($name == "Espace Diamant"){
+                $domain->setImgUrl("logo-espacediamant.png");
+            }else{
+                $domain->setImgUrl("Logo_Les_3_Vallées.png");
+            }
             $manager->persist($domain);
         }
         
