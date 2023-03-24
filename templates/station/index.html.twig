@@ -3,16 +3,19 @@
 {% block title %}Hello StationController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
+
+
     <h1>{{ station.name }}</h1>
+    <h2 style="color: red">Les pistes :</h2>
+    {% for slope in station.slopes %}
+        <h2>{{ slope.name }}</h2>
+        <p>{{ slope.description }}</p>
+    {% endfor %}
+    <h2 style="color: red">Les remontées :</h2>
     {% for lift in station.lifts %}
         <h2>{{ lift.name }}</h2>
         <p>{{ lift.description }}</p>
     {% endfor %}
-</div>
+
 {% endblock %}
