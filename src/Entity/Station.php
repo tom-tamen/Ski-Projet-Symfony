@@ -37,6 +37,10 @@ class Station
     #[ORM\OneToMany(mappedBy: 'station', targetEntity: Faq::class)]
     private Collection $faqs;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $owner = null;
+
     public function __construct()
     {
         $this->slopes = new ArrayCollection();
@@ -183,6 +187,18 @@ class Station
                 $faq->setStation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(User $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }
