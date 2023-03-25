@@ -37,6 +37,7 @@
     </section>
     <section class="flex flex-col gap-5 md:flex-row justify-between">
         <section class="flex flex-col gap-5" id="slopes-container">
+            <h3 class="text-center font-bold">Pistes</h3>
             {% for slope in station.slopes %}
                 <div class="bg-CustomWhite mx-5 rounded-xl border-b-2 border-mainBlue align-middle flex flex-col py-3 px-3 menu md:min-w-[350px] lg:min-w-[550px] xl:min-w-[750px] 2xl:min-w-[1000px]" onclick="toggleDiv(this)" data-difficulty="{{ slope.difficulty }}">
                     <div class="flex flex-row justify-between">
@@ -73,6 +74,35 @@
                             {% else %}
                                 <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/close.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>Fermée</p></div>
                             {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <h3 class="text-center font-bold">Remontées mécaniques</h3>
+            {% for lift in station.lifts %}
+                <div class="bg-CustomWhite mx-5 rounded-xl border-b-2 border-mainBlue align-middle flex flex-col py-3 px-3 menu md:min-w-[350px] lg:min-w-[550px] xl:min-w-[750px] 2xl:min-w-[1000px]" onclick="toggleDiv(this)">
+                    <div class="flex flex-row justify-between">
+                        <div class="flex flex-row">
+                            <img src="" alt="">
+                            <h2>{{ lift.name }}</h2>
+                        </div>
+                        <button>
+                            <img src="{{ asset('assets/images/pistes/arrowOpen.png') }}" alt="" class="arrow" style="display: inline-block; transform: rotate(-90deg); transition: transform 0.2s;">
+                        </button>
+                    </div>
+                    <div class="hidden-content" style="display: none">
+                        <div class="flex flex-row justify-between">
+                            <h2 class="font-bold">{{ lift.type }}</h2>
+                            <h3>{{ lift.duration|date("i") }} min et {{ lift.duration|date("s") }} secondes</h3>
+                        </div>
+                        <p>{{ lift.description }}</p>
+                        <div class="flex align-middle justify-between">
+                            <div class="flex flex-col">
+                                <h3>Ouverture : {{ lift.open|date("h:i:s") }}</h3>
+                                <h3>Fermeture : {{ lift.close|date("h:i:s") }}</h3>
+                            </div>
+                            <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/star.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>{{ lift.grade }}</p></div>
+                            <div class="flex flex-row align-middle gap-1"><p>Station : {{ lift.station.name }}</p></div>
                         </div>
                     </div>
                 </div>
@@ -153,10 +183,7 @@
     </section>
     <!--
     <h2 style="color: red">Les remontées :</h2>
-    {% for lift in station.lifts %}
-        <h2>{{ lift.name }}</h2>
-        <p>{{ lift.description }}</p>
-    {% endfor %}
+
     -->
 
 {% endblock %}
