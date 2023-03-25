@@ -37,67 +37,70 @@
             </select>
         </form>
     </section>
-    <section class="flex flex-col gap-5">
-        {% for slope in station.slopes %}
-        <div class="bg-CustomWhite mx-5 rounded-xl border-b-2 border-mainBlue align-middle flex flex-col py-3 px-3 menu" onclick="toggleDiv(this)">
-            <div class="flex flex-row justify-between">
-                <div class="flex flex-row">
-                    {% if slope.difficulty == 'Verte' %}
-                        <img src="{{ asset('assets/images/pistes/drapeaux_vert.png') }}" alt="Piste verte" style="width: 22px">
-                    {% elseif slope.difficulty == 'Bleu' %}
-                        <img src="{{ asset('assets/images/pistes/drapeaux_bleu.png') }}" alt="Piste bleue" style="width: 22px">
-                    {% elseif slope.difficulty == 'Rouge' %}
-                        <img src="{{ asset('assets/images/pistes/drapeaux_rouge.png') }}" alt="Piste rouge" style="width: 22px">
-                    {% elseif slope.difficulty == 'Noir' %}
-                        <img src="{{ asset('assets/images/pistes/drapeaux_noir.png') }}" alt="Piste noire" style="width: 22px">
-                    {% elseif slope.difficulty == 'Double Noir' %}
-                        <img src="{{ asset('assets/images/pistes/drapeaux_double_noir.png') }}" alt="Piste double noire" style="width: 22px">
-                    {% endif %}
-                    <h2>{{ slope.name }}</h2>
+    <section class="flex flex-col gap-5 md:flex-row justify-between">
+        <section class="flex flex-col gap-5">
+            {% for slope in station.slopes %}
+                <div class="bg-CustomWhite mx-5 rounded-xl border-b-2 border-mainBlue align-middle flex flex-col py-3 px-3 menu md:min-w-[350px] lg:min-w-[550px] xl:min-w-[750px] 2xl:min-w-[1000px]" onclick="toggleDiv(this)">
+                    <div class="flex flex-row justify-between">
+                        <div class="flex flex-row">
+                            {% if slope.difficulty == 'Verte' %}
+                                <img src="{{ asset('assets/images/pistes/drapeaux_vert.png') }}" alt="Piste verte" style="width: 22px">
+                            {% elseif slope.difficulty == 'Bleu' %}
+                                <img src="{{ asset('assets/images/pistes/drapeaux_bleu.png') }}" alt="Piste bleue" style="width: 22px">
+                            {% elseif slope.difficulty == 'Rouge' %}
+                                <img src="{{ asset('assets/images/pistes/drapeaux_rouge.png') }}" alt="Piste rouge" style="width: 22px">
+                            {% elseif slope.difficulty == 'Noir' %}
+                                <img src="{{ asset('assets/images/pistes/drapeaux_noir.png') }}" alt="Piste noire" style="width: 22px">
+                            {% elseif slope.difficulty == 'Double Noir' %}
+                                <img src="{{ asset('assets/images/pistes/drapeaux_double_noir.png') }}" alt="Piste double noire" style="width: 22px">
+                            {% endif %}
+                            <h2>{{ slope.name }}</h2>
+                        </div>
+                        <button>
+                            <img src="{{ asset('assets/images/pistes/arrowOpen.png') }}" alt="" class="arrow" style="display: inline-block; transform: rotate(-90deg); transition: transform 0.2s;">
+                        </button>
+                    </div>
+                    <div class="hidden-content" style="display: none">
+                        <div class="flex flex-row justify-between">
+                            <h2 class="font-bold">{{ slope.type }}</h2>
+                            <h3>{{ slope.duration|date("i:s") }}</h3>
+                        </div>
+                        <p>{{ slope.description }}</p>
+                        <div class="flex align-middle justify-between">
+                            <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/star.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>{{ slope.grade }}</p></div>
+                            <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/people.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>{{ slope.people }}</p></div>
+                            <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/quality.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>{{ slope.quality }}</p></div>
+                            {% if slope.isOpen == 1 %}
+                                <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/open.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>Ouvert</p></div>
+                            {% else %}
+                                <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/close.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>Fermée</p></div>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
-                <button>
-                    <img src="{{ asset('assets/images/pistes/arrowOpen.png') }}" alt="" class="arrow" style="display: inline-block; transform: rotate(-90deg); transition: transform 0.2s;">
-                </button>
-            </div>
-            <div class="hidden-content" style="display: none">
-                <div class="flex flex-row justify-between">
-                    <h2 class="font-bold">{{ slope.type }}</h2>
-                    <h3>{{ slope.duration|date("i:s") }}</h3>
-                </div>
-                <p>{{ slope.description }}</p>
-                <div class="flex align-middle justify-between">
-                    <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/star.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>{{ slope.grade }}</p></div>
-                    <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/people.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>{{ slope.people }}</p></div>
-                    <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/quality.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>{{ slope.quality }}</p></div>
-                    {% if slope.isOpen == 1 %}
-                    <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/open.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>Ouvert</p></div>
-                    {% else %}
-                    <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/close.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>Fermée</p></div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-        {% endfor %}
+            {% endfor %}
+        </section>
         <section>
-            <div class="bg-CustomWhite mx-5 rounded-xl">
+            <div class="bg-CustomWhite mx-5 rounded-xl p-5 md:max-w-md">
                 <h1 class="text-mobileXL text-titleBlue">FAQ</h1>
                 {% for question in station.faqs %}
-                    <div class="flex flex-row justify-between" onclick="toggleDiv(this)">
+                    <div class="flex flex-row justify-between gap-2" onclick="toggleDiv(this)">
                         <div class="flex flex-col">
                             <div class="mt-5">
-                                <h2>{{ question.question }}</h2>
+                                <h2 class="font-bold">{{ question.question }}</h2>
                             </div>
                             <div  class="hidden-content" style="display: none">
                                 <h3>{{ question.answer }}</h3>
                             </div>
                         </div>
                         <button>
-                            <img src="{{ asset('assets/images/pistes/arrowOpen.png') }}" alt="" class="arrow" style="display: inline-block; transform: rotate(-90deg); transition: transform 0.2s;">
+                            <img min-width="10px" height="10px" src="{{ asset('assets/images/pistes/arrowOpen.png') }}" alt="" class="arrow" style="display: inline-block; transform: rotate(-90deg); transition: transform 0.2s;">
                         </button>
                     </div>
                 {% endfor %}
             </div>
         </section>
+    </section>
         <script>
             function toggleDiv(div) {
                 var contentDiv = div.querySelector('.hidden-content');
