@@ -42,7 +42,17 @@
         <div class="bg-CustomWhite mx-5 rounded-xl border-b-2 border-mainBlue align-middle flex flex-col py-3 px-3 menu" onclick="toggleDiv(this)">
             <div class="flex flex-row justify-between">
                 <div class="flex flex-row">
-                    <img src="{{ asset('assets/images/pistes/search.svg') }}" alt="">
+                    {% if slope.difficulty == 'Verte' %}
+                        <img src="{{ asset('assets/images/pistes/drapeaux_vert.png') }}" alt="Piste verte" style="width: 22px">
+                    {% elseif slope.difficulty == 'Bleu' %}
+                        <img src="{{ asset('assets/images/pistes/drapeaux_bleu.png') }}" alt="Piste bleue" style="width: 22px">
+                    {% elseif slope.difficulty == 'Rouge' %}
+                        <img src="{{ asset('assets/images/pistes/drapeaux_rouge.png') }}" alt="Piste rouge" style="width: 22px">
+                    {% elseif slope.difficulty == 'Noir' %}
+                        <img src="{{ asset('assets/images/pistes/drapeaux_noir.png') }}" alt="Piste noire" style="width: 22px">
+                    {% elseif slope.difficulty == 'Double Noir' %}
+                        <img src="{{ asset('assets/images/pistes/drapeaux_double_noir.png') }}" alt="Piste double noire" style="width: 22px">
+                    {% endif %}
                     <h2>{{ slope.name }}</h2>
                 </div>
                 <button>
