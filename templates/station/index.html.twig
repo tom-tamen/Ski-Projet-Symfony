@@ -22,7 +22,7 @@
         </a>
         <form action="" class="flex flex-row justify-between gap-2 mx-5 my-7">
             <div class="border-2 border-black rounded-xl p-1 flex flex-row">
-                <input type="text" class="w-full">
+                <input type="text" class="w-full" id="searchbar" style="outline: none">
                 <img src="{{ asset('assets/images/pistes/search.svg') }}" alt="" class="px-2">
             </div>
             <select name="" id="" class="border-2 border-black rounded-xl p-1">
@@ -38,7 +38,7 @@
         </form>
     </section>
     <section class="flex flex-col gap-5 md:flex-row justify-between">
-        <section class="flex flex-col gap-5">
+        <section class="flex flex-col gap-5" id="slopes-container">
             {% for slope in station.slopes %}
                 <div class="bg-CustomWhite mx-5 rounded-xl border-b-2 border-mainBlue align-middle flex flex-col py-3 px-3 menu md:min-w-[350px] lg:min-w-[550px] xl:min-w-[750px] 2xl:min-w-[1000px]" onclick="toggleDiv(this)">
                     <div class="flex flex-row justify-between">
@@ -115,6 +115,29 @@
                     arrowDiv.style.transform = 'rotate(-90deg)'; // Réinitialiser la rotation de la flèche
                 }
             }
+
+            // Récupérez l'élément de recherche et l'élément parent des éléments à filtrer
+            const searchInput = document.getElementById('searchbar');
+            const slopesContainer = document.getElementById('slopes-container');
+
+            // Ajoutez un écouteur d'événement pour l'événement de saisie de l'utilisateur
+            searchInput.addEventListener('input', function() {
+                // Récupérez la valeur saisie dans le champ de recherche
+                const searchValue = searchInput.value.toLowerCase();
+
+                // Parcourez tous les éléments enfants de l'élément parent
+                Array.from(slopesContainer.children).forEach(function(slopeElement) {
+                    // Récupérez le nom de la piste à partir de l'élément
+                    const slopeName = slopeElement.querySelector('h2').innerText.toLowerCase();
+
+                    // Si le nom de la piste contient la valeur de recherche, affichez l'élément, sinon masquez-le
+                    if (slopeName.includes(searchValue)) {
+                        slopeElement.style.display = 'block';
+                    } else {
+                        slopeElement.style.display = 'none';
+                    }
+                });
+            });
         </script>
     </section>
     <!--
