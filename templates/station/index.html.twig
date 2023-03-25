@@ -25,22 +25,20 @@
                 <input type="text" class="w-full" id="searchbar" style="outline: none">
                 <img src="{{ asset('assets/images/pistes/search.svg') }}" alt="" class="px-2">
             </div>
-            <select name="" id="" class="border-2 border-black rounded-xl p-1">
-                <option value="">Filtrer</option>
-                <option value=""></option>
-                <option value="">Pistes</option>
-                <option value="">Remontées</option>
-                <option value="">Piste verte</option>
-                <option value="">Piste bleue</option>
-                <option value="">Piste rouge</option>
-                <option value="">Piste noire</option>
+            <select name="" id="filter-select" class="border-2 border-black rounded-xl p-1">
+                <option value="">Tous</option>
+                <option value="Verte">Verte</option>
+                <option value="Bleu">Bleu</option>
+                <option value="Rouge">Rouge</option>
+                <option value="Noir">Noir</option>
+                <option value="Double Noir">Double Noir</option>
             </select>
         </form>
     </section>
     <section class="flex flex-col gap-5 md:flex-row justify-between">
         <section class="flex flex-col gap-5" id="slopes-container">
             {% for slope in station.slopes %}
-                <div class="bg-CustomWhite mx-5 rounded-xl border-b-2 border-mainBlue align-middle flex flex-col py-3 px-3 menu md:min-w-[350px] lg:min-w-[550px] xl:min-w-[750px] 2xl:min-w-[1000px]" onclick="toggleDiv(this)">
+                <div class="bg-CustomWhite mx-5 rounded-xl border-b-2 border-mainBlue align-middle flex flex-col py-3 px-3 menu md:min-w-[350px] lg:min-w-[550px] xl:min-w-[750px] 2xl:min-w-[1000px]" onclick="toggleDiv(this)" data-difficulty="{{ slope.difficulty }}">
                     <div class="flex flex-row justify-between">
                         <div class="flex flex-row">
                             {% if slope.difficulty == 'Verte' %}
@@ -135,6 +133,19 @@
                         slopeElement.style.display = 'block';
                     } else {
                         slopeElement.style.display = 'none';
+                    }
+                });
+            });
+            const selectElement = document.querySelector('#filter-select');
+            selectElement.addEventListener('change', (event) => {
+                const selectedOption = event.target.value;
+                const elements = document.querySelectorAll('[data-difficulty]');
+                elements.forEach((element) => {
+                    const difficulty = element.getAttribute('data-difficulty');
+                    if (selectedOption === '' || selectedOption === difficulty) {
+                        element.style.display = 'block';
+                    } else {
+                        element.style.display = 'none';
                     }
                 });
             });
