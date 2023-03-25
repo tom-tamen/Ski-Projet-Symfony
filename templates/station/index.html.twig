@@ -78,6 +78,17 @@
             </div>
         </div>
         {% endfor %}
+        <section>
+            <div class="bg-CustomWhite mx-5 rounded-xl">
+                <h1 class="text-mobileXL text-titleBlue">FAQ</h1>
+                {% for question in station.faqs %}
+                    <div>
+                        <h2>{{ question.question }}</h2>
+                        <h3>{{ question.answer }}</h3>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
         <script>
             function toggleDiv(div) {
                 var contentDiv = div.querySelector('.hidden-content');
