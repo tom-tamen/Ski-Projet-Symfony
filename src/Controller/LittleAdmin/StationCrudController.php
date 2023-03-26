@@ -66,6 +66,7 @@ class StationCrudController extends AbstractCrudController
         ->setUploadedFileNamePattern('[slug]-[randomhash].[extension]')
         ->setFormTypeOption('constraints', [new NotBlank()]),
     TextField::new('description'),];
-        
+         
+    
     }
 }
