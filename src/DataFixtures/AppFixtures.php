@@ -46,7 +46,7 @@ class AppFixtures extends Fixture
         $x = 0;
         foreach($domains as $domain){
             
-            foreach(['Les Saisies', 'Crest-Volant Cohennoz', 'Notre-Dame-De-Bellecombe', 'Praz-Sur-Arly','Flumet'] as $name){
+            foreach(['Les-Saisies', 'Crest-Volant-Cohennoz', 'Notre-Dame-De-Bellecombe', 'Praz-Sur-Arly','Flumet'] as $name){
                 $user = new User();
                 $user->setEmail($x.$name."@gmail.com");
                 $user->setPassword($this->userPasswordHasherInterface->hashPassword(
@@ -126,15 +126,14 @@ class AppFixtures extends Fixture
                     $manager->persist($lift);
                 }
             }
-    
-            $challenge = new Challenge();
-            $challenge->setImgUrl("https://picsum.photos/200/300");
-            $challenge->setName("Challenge");
-            $challenge->setDescription("Le meilleur des challenges");
-            $manager->persist($challenge);
-    
-            $manager->flush();  
         };
+        $challenge = new Challenge();
+        $challenge->setImgUrl("assets\images\challenge\challenge.png");
+        $challenge->setName("Le backflip");
+        $challenge->setDescription("Il consiste à réaliser un salto arrière. Concrètement, afin de le réaliser, vous devez lancer votre têtes (et épaules) en arrière en essayant le plus vite possible d'avoir un contact visuel avec votre réception.");
+        $manager->persist($challenge);
+
+        $manager->flush();  
         
         
 
