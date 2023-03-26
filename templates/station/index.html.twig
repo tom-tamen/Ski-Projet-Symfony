@@ -3,19 +3,187 @@
 {% block title %}Hello StationController!{% endblock %}
 
 {% block body %}
+    <header class="bg-black h-[63px]">
+        <p>Test</p>
+    </header>
+    <section class="text-mobileBase flex flex-col justify-center">
+        <div class="flex flex-row justify-between py-7 px-5">
+            <a href="#" onclick="history.back()">
+                <img src="{{ asset('assets/images/pistes/arrowLeft.png') }}">
+            </a>
+            <h1 class="text-mobileXL text-titleBlue">
+                {{ station.name }}
+            </h1>
+            <div>
+            </div>
+        </div>
+        <a href="{{ path('app_challenge') }}" class="text-center bg-CustomWhite py-2 mx-5 mt-2">
+            Venez découvrir notre défi du jour
+        </a>
+        <form action="" class="flex flex-row justify-between gap-2 mx-5 my-7">
+            <div class="border-2 border-black rounded-xl p-1 flex flex-row">
+                <input type="text" class="w-full" id="searchbar" style="outline: none">
+                <img src="{{ asset('assets/images/pistes/search.svg') }}" alt="" class="px-2">
+            </div>
+            <select name="" id="filter-select" class="border-2 border-black rounded-xl p-1">
+                <option value="">Tous</option>
+                <option value="Verte">Verte</option>
+                <option value="Bleu">Bleu</option>
+                <option value="Rouge">Rouge</option>
+                <option value="Noir">Noir</option>
+                <option value="Double Noir">Double Noir</option>
+            </select>
+        </form>
+    </section>
+    <section class="flex flex-col gap-5 md:flex-row justify-between">
+        <section class="flex flex-col gap-5" id="slopes-container">
+            <h3 class="text-center font-bold">Pistes</h3>
+            {% for slope in station.slopes %}
+                <div class="bg-CustomWhite mx-5 rounded-xl border-b-2 border-mainBlue align-middle flex flex-col py-3 px-3 menu md:min-w-[350px] lg:min-w-[550px] xl:min-w-[750px] 2xl:min-w-[1000px]" onclick="toggleDiv(this)" data-difficulty="{{ slope.difficulty }}">
+                    <div class="flex flex-row justify-between">
+                        <div class="flex flex-row">
+                            {% if slope.difficulty == 'Verte' %}
+                                <img src="{{ asset('assets/images/pistes/drapeaux_vert.png') }}" alt="Piste verte" style="width: 22px">
+                            {% elseif slope.difficulty == 'Bleu' %}
+                                <img src="{{ asset('assets/images/pistes/drapeaux_bleu.png') }}" alt="Piste bleue" style="width: 22px">
+                            {% elseif slope.difficulty == 'Rouge' %}
+                                <img src="{{ asset('assets/images/pistes/drapeaux_rouge.png') }}" alt="Piste rouge" style="width: 22px">
+                            {% elseif slope.difficulty == 'Noir' %}
+                                <img src="{{ asset('assets/images/pistes/drapeaux_noir.png') }}" alt="Piste noire" style="width: 22px">
+                            {% elseif slope.difficulty == 'Double Noir' %}
+                                <img src="{{ asset('assets/images/pistes/drapeaux_double_noir.png') }}" alt="Piste double noire" style="width: 22px">
+                            {% endif %}
+                            <h2>{{ slope.name }}</h2>
+                        </div>
+                        <button>
+                            <img src="{{ asset('assets/images/pistes/arrowOpen.png') }}" alt="" class="arrow" style="display: inline-block; transform: rotate(-90deg); transition: transform 0.2s;">
+                        </button>
+                    </div>
+                    <div class="hidden-content" style="display: none">
+                        <div class="flex flex-row justify-between">
+                            <h2 class="font-bold">{{ slope.type }}</h2>
+                            <h3>{{ slope.duration|date("i:s") }}</h3>
+                        </div>
+                        <p>{{ slope.description }}</p>
+                        <div class="flex align-middle justify-between">
+                            <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/star.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>{{ slope.grade }}</p></div>
+                            <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/people.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>{{ slope.people }}</p></div>
+                            <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/quality.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>{{ slope.quality }}</p></div>
+                            {% if slope.isOpen == 1 %}
+                                <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/open.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>Ouvert</p></div>
+                            {% else %}
+                                <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/close.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>Fermée</p></div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <h3 class="text-center font-bold">Remontées mécaniques</h3>
+            {% for lift in station.lifts %}
+                <div class="bg-CustomWhite mx-5 rounded-xl border-b-2 border-mainBlue align-middle flex flex-col py-3 px-3 menu md:min-w-[350px] lg:min-w-[550px] xl:min-w-[750px] 2xl:min-w-[1000px]" onclick="toggleDiv(this)">
+                    <div class="flex flex-row justify-between">
+                        <div class="flex flex-row">
+                            <img src="" alt="">
+                            <h2>{{ lift.name }}</h2>
+                        </div>
+                        <button>
+                            <img src="{{ asset('assets/images/pistes/arrowOpen.png') }}" alt="" class="arrow" style="display: inline-block; transform: rotate(-90deg); transition: transform 0.2s;">
+                        </button>
+                    </div>
+                    <div class="hidden-content" style="display: none">
+                        <div class="flex flex-row justify-between">
+                            <h2 class="font-bold">{{ lift.type }}</h2>
+                            <h3>{{ lift.duration|date("i") }} min et {{ lift.duration|date("s") }} secondes</h3>
+                        </div>
+                        <p>{{ lift.description }}</p>
+                        <div class="flex align-middle justify-between">
+                            <div class="flex flex-col">
+                                <h3>Ouverture : {{ lift.open|date("h:i:s") }}</h3>
+                                <h3>Fermeture : {{ lift.close|date("h:i:s") }}</h3>
+                            </div>
+                            <div class="flex flex-row align-middle gap-1"><img src="{{ asset('assets/images/pistes/star.png') }}"alt="" style="height:12px" class="mt-[5px]"><p>{{ lift.grade }}</p></div>
+                            <div class="flex flex-row align-middle gap-1"><p>Station : {{ lift.station.name }}</p></div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </section>
+        <section>
+            <div class="bg-CustomWhite mx-5 rounded-xl p-5 md:max-w-md">
+                <h1 class="text-mobileXL text-titleBlue">FAQ</h1>
+                {% for question in station.faqs %}
+                    <div class="flex flex-row justify-between gap-2" onclick="toggleDiv(this)">
+                        <div class="flex flex-col">
+                            <div class="mt-5">
+                                <h2 class="font-bold">{{ question.question }}</h2>
+                            </div>
+                            <div  class="hidden-content" style="display: none">
+                                <h3>{{ question.answer }}</h3>
+                            </div>
+                        </div>
+                        <button>
+                            <img min-width="10px" height="10px" src="{{ asset('assets/images/pistes/arrowOpen.png') }}" alt="" class="arrow" style="display: inline-block; transform: rotate(-90deg); transition: transform 0.2s;">
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </section>
+        <script>
+            function toggleDiv(div) {
+                var contentDiv = div.querySelector('.hidden-content');
+                var arrowDiv = div.querySelector('.arrow');
+                if (contentDiv.style.display === 'none') {
+                    // Afficher la div supplémentaire et agrandir la div
+                    contentDiv.style.display = 'block';
+                    arrowDiv.style.transform = 'rotate(0deg)'; // Ajouter la rotation de 90 degrés à la flèche
+                } else {
+                    // Cacher la div supplémentaire et réduire la div à sa taille originale
+                    contentDiv.style.display = 'none';
+                    arrowDiv.style.transform = 'rotate(-90deg)'; // Réinitialiser la rotation de la flèche
+                }
+            }
 
+            // Récupérez l'élément de recherche et l'élément parent des éléments à filtrer
+            const searchInput = document.getElementById('searchbar');
+            const slopesContainer = document.getElementById('slopes-container');
 
+            // Ajoutez un écouteur d'événement pour l'événement de saisie de l'utilisateur
+            searchInput.addEventListener('input', function() {
+                // Récupérez la valeur saisie dans le champ de recherche
+                const searchValue = searchInput.value.toLowerCase();
 
-    <h1>{{ station.name }}</h1>
-    <h2 style="color: red">Les pistes :</h2>
-    {% for slope in station.slopes %}
-        <h2>{{ slope.name }}</h2>
-        <p>{{ slope.description }}</p>
-    {% endfor %}
+                // Parcourez tous les éléments enfants de l'élément parent
+                Array.from(slopesContainer.children).forEach(function(slopeElement) {
+                    // Récupérez le nom de la piste à partir de l'élément
+                    const slopeName = slopeElement.querySelector('h2').innerText.toLowerCase();
+
+                    // Si le nom de la piste contient la valeur de recherche, affichez l'élément, sinon masquez-le
+                    if (slopeName.includes(searchValue)) {
+                        slopeElement.style.display = 'block';
+                    } else {
+                        slopeElement.style.display = 'none';
+                    }
+                });
+            });
+            const selectElement = document.querySelector('#filter-select');
+            selectElement.addEventListener('change', (event) => {
+                const selectedOption = event.target.value;
+                const elements = document.querySelectorAll('[data-difficulty]');
+                elements.forEach((element) => {
+                    const difficulty = element.getAttribute('data-difficulty');
+                    if (selectedOption === '' || selectedOption === difficulty) {
+                        element.style.display = 'block';
+                    } else {
+                        element.style.display = 'none';
+                    }
+                });
+            });
+        </script>
+    </section>
+    <!--
     <h2 style="color: red">Les remontées :</h2>
-    {% for lift in station.lifts %}
-        <h2>{{ lift.name }}</h2>
-        <p>{{ lift.description }}</p>
-    {% endfor %}
+
+    -->
 
 {% endblock %}
