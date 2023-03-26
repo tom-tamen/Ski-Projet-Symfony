@@ -20,12 +20,12 @@ class StationCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')->hideOnIndex(),
+            IdField::new('id')->hideOnIndex()->hideOnForm(),
             AssociationField::new('domain'),
             AssociationField::new('owner'),
             TextField::new('name'),
             TextField::new('description'),
-            ImageField::new('ImageURL')
+            ImageField::new('imgUrl')
                 ->setUploadDir('public/assets/images/stations')
                 ->setBasePath('assets/images/stations')
                 ->setUploadedFileNamePattern('[randomhash].[extension]')

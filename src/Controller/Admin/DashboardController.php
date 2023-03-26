@@ -54,10 +54,10 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Domains', 'fa fa-home', Domain::class);
         yield MenuItem::linkToCrud('Stations','fas fa-list', Station::class)->setController(StationCrudController::class);
-        yield MenuItem::linkToCrud('Slope','fas fa-list', Slope::class)->setController(SlopeCrudController::class);
-        yield MenuItem::linkToCrud('Lift','fas fa-list', Lift::class)->setController(LiftCrudController::class);
-        yield MenuItem::linkToCrud('User','fas fa-list', User::class);
-        yield MenuItem::linkToCrud('F.A.Q','fas fa-list', Faq::class)->setController(FaqCrudController::class);
-        yield MenuItem::linkToCrud('Challenge','fas fa-list', Challenge::class);
+        yield MenuItem::linkToCrud('Slope','fa-solid fa-person-skiing', Slope::class)->setController(SlopeCrudController::class);
+        yield MenuItem::linkToCrud('Lift','fa-solid fa-cable-car', Lift::class)->setController(LiftCrudController::class);
+        yield MenuItem::linkToCrud('User','fa-solid fa-user', User::class);
+        yield MenuItem::linkToCrud('F.A.Q','fa-solid fa-question', Faq::class)->setController(FaqCrudController::class);
+        yield MenuItem::linkToCrud('Challenge','fa-solid fa-medal', Challenge::class);
     }
 }

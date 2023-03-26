@@ -6,6 +6,7 @@ use App\Entity\Station;
 use App\Repository\DomainRepository;
 use App\Repository\UserRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Doctrine\ORM\EntityManagerInterface;
@@ -43,30 +44,31 @@ class StationCrudController extends AbstractCrudController
     }
     public function configureFields(string $pageName): iterable
     {
-        return[AssociationField::new('domain')
-        ->setFormTypeOptions([
-            'query_builder' => function (DomainRepository $repository) {
-                return $repository->createQueryBuilder('d')
-                    ->orderBy('d.name', 'ASC');
-            },
-        ]),
+        return[
+                IdField::new('id')->hideOnForm()->hideOnIndex(),
+                AssociationField::new('domain')
+                    ->setFormTypeOptions([
+                        'query_builder' => function (DomainRepository $repository) {
+                            return $repository->createQueryBuilder('d')
+                                ->orderBy('d.name', 'ASC');
+                        },
+                    ]),
 
-    AssociationField::new('owner')
-        ->setFormTypeOptions([
-            'query_builder' => function (UserRepository $repository) {
-                return $repository->createQueryBuilder('u')
-                    ->where('u.id = :userId')
-                    ->setParameter('userId', $this->getUser());
-            },
-        ]),
+                AssociationField::new('owner')
+                    ->setFormTypeOptions([
+                        'query_builder' => function (UserRepository $repository) {
+                            return $repository->createQueryBuilder('u')
+                                ->where('u.id = :userId')
+                                ->setParameter('userId', $this->getUser());
+                        },
+                    ]),
 
-    TextField::new('name'),
-    ImageField::new('img_url')->setUploadDir('public/assets/images/stations')
-        ->setBasePath('assets/images/stations')
-        ->setUploadedFileNamePattern('[slug]-[randomhash].[extension]')
-        ->setFormTypeOption('constraints', [new NotBlank()]),
-    TextField::new('description'),];
-         
-    
+                TextField::new('name'),
+                ImageField::new('imgUrl')->setUploadDir('public/assets/images/stations')
+                    ->setBasePath('assets/images/stations')
+                    ->setUploadedFileNamePattern('[slug]-[randomhash].[extension]')
+                    ->setFormTypeOption('constraints', [new NotBlank()]),
+                TextField::new('description'),
+            ];
     }
 }
