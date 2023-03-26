@@ -62,7 +62,7 @@ class StationCrudController extends AbstractCrudController
 
     TextField::new('name'),
     ImageField::new('img_url')->setUploadDir('public/uploads/stations')
-        ->setBasePath('uploads/products')
+        ->setBasePath('uploads/stations')
         ->setUploadedFileNamePattern('[slug]-[randomhash].[extension]')
         ->setFormTypeOption('constraints', [new NotBlank()]),
     TextField::new('description'),];
