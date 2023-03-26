@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello StationController!{% endblock %}
+{% block title %}{{ station.name }}{% endblock %}
 
 {% block body %}
     <section class="text-mobileBase flex flex-col justify-center">
@@ -161,7 +161,7 @@
                         slopeElement.style.display = 'none';
                     }
                 });
-            });
+            }});
             const selectElement = document.querySelector('#filter-select');
             selectElement.addEventListener('change', (event) => {
                 const selectedOption = event.target.value;
