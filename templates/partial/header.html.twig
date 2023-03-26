@@ -1,0 +1,55 @@
+<!-- ======= Header ======= -->
+<header>
+    <div class="flex flex-row items-center justify-between w-full bg-white h-[63px] gap-4 mb-[16px] md:mb-[40px] py-[2rem] px-[1rem] md:px-[8rem]">
+        <a href="/"><img src="../assets/images/header/logo.svg" alt="logo" class="w-[138px] h-[19px]"></a>
+            <div>
+                <nav id="navbar" class="flex flex-col items-start md:flex-row md:items-center md:justify-between md:gap-[80px] text-desktopLG text-titleBlue">
+                    <a href="/" class="hover:text-mainBlue">Domaines</a>
+                    <a href="/challenge" class="hover:text-mainBlue">Défis</a>
+                </nav>
+                <div id="menu-btn" class="fas fa-bars text-[1.75rem] text-mainBlue hidden cursor-pointer"></div>
+            </div>
+        </div>
+        <style>
+            @media (max-width: 768px) {
+                #menu-btn {
+                    display: inline-block;
+                    transition: .2s linear;
+                }
+                #menu-btn.fa-times{
+                    transform: rotate(180deg);
+                }
+                #navbar {
+                        position: absolute;
+                        top: 63px;
+                        left: 0;
+                        right: 0;
+                        background-color: white;
+                        border-bottom: .1rem solid #333;
+                        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                        transition: .2s linear;
+                }
+                #navbar.active {
+                    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);                    
+                }
+                #navbar a {
+                    display: flex;
+                    margin: 1rem;
+                }
+            }
+        </style>
+        <script>
+            let menu = document.querySelector('#menu-btn');
+            let navbar = document.querySelector('#navbar')
+        
+            menu.onclick = () => {
+                menu.classList.toggle('fa-times');
+                navbar.classList.toggle('active');
+            }
+            window.onscroll = () => {
+                menu.classList.remove('fa-times');
+                navbar.classList.remove('active');
+            }
+        </script>
+</header>
+<!-- ======= End Header ======= -->
