@@ -21,7 +21,13 @@
                         <a href="{{ path('station_show', {'id': station.id}) }}" class="flex flex-col justify-center">
                             <div class="min-h-[155px] lg:min-h-[240px]"> 
                                 <div class="flex justify-center mt-[10px] mb-[10px] lg:mt-[48px] lg:mb-[32px]">
-                                    <img src="{{ station.imgUrl }}" alt="{{ station.name }}" class="object-cover w-[119px] h-[84px] lg:w-[180px] lg:h-[126px]">
+                                {% if station.imgUrl == "https://picsum.photos/200/300"%}
+                    <img src="{{ station.imgUrl }}" alt="{{ station.name }}" class="object-cover w-[119px] h-[84px] lg:w-[180px] lg:h-[126px]">
+                {% else %}
+                    <img src="../uploads/stations/{{station.imgUrl}}" alt="{{ station.name }}" class="object-cover w-[119px] h-[84px] lg:w-[180px] lg:h-[126px]" />
+                {% endif %}
+                    
+                </img>
                                 </div>
                                 <h2 class="text-textColor text-mobileBase mb-[1px] lg:text-desktopBase">{{ station.name }}</h2>
                             </div>
