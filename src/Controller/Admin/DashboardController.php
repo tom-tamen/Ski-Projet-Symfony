@@ -2,7 +2,14 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Challenge;
 use App\Entity\Domain;
+use App\Entity\Faq;
+use App\Entity\Lift;
+use App\Entity\Slope;
+use App\Entity\Station;
+use App\Entity\User;
+use App\Controller\Admin\StationCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -42,7 +49,12 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Domaines', 'fa fa-home', Domain::class)
-        ->setPermission('ROLE_SUPER_ADMIN');
+        yield MenuItem::linkToCrud('Domains', 'fa fa-home', Domain::class);
+        yield MenuItem::linkToCrud('Stations','fas fa-list', Station::class)->setController(StationCrudController::class);
+        yield MenuItem::linkToCrud('Slope','fas fa-list', Slope::class)->setController(SlopeCrudController::class);
+        yield MenuItem::linkToCrud('Lift','fas fa-list', Lift::class)->setController(LiftCrudController::class);
+        yield MenuItem::linkToCrud('User','fas fa-list', User::class);
+        yield MenuItem::linkToCrud('F.A.Q','fas fa-list', Faq::class)->setController(FaqCrudController::class);
+        yield MenuItem::linkToCrud('Challenge','fas fa-list', Challenge::class);
     }
 }

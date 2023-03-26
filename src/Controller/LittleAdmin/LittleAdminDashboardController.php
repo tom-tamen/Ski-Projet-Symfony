@@ -2,8 +2,7 @@
 
 namespace App\Controller\LittleAdmin;
 
-use App\Controller\LittleAdmin\StationCrudController as LittleAdminStationCrudController;
-use App\Controller\StationCrudController;
+use App\Controller\LittleAdmin\StationCrudController;
 use App\Entity\Faq;
 use App\Entity\Lift;
 use App\Entity\Slope;
@@ -15,7 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DashboardController extends AbstractDashboardController
+class LittleAdminDashboardController extends AbstractDashboardController
 {
     #[Route('/myadmin', name: 'myadmin')]
     public function index(): Response
@@ -25,7 +24,7 @@ class DashboardController extends AbstractDashboardController
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        return $this->redirect($adminUrlGenerator->setController(LittleAdminStationCrudController::class)->generateUrl());
+        return $this->redirect($adminUrlGenerator->setController(StationCrudController::class)->generateUrl());
 
         // Option 2. You can make your dashboard redirect to different pages depending on the user
         //

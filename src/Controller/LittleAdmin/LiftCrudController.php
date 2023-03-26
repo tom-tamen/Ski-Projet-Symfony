@@ -27,7 +27,8 @@ class LiftCrudController extends AbstractCrudController
     {
         return Lift::class;
     }
-
+    
+    
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): \Doctrine\ORM\QueryBuilder
     {
         $qb = $this->entityManager->createQueryBuilder();
