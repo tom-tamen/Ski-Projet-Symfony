@@ -6,6 +6,18 @@
                 <nav id="navbar" class="flex flex-col items-start md:flex-row md:items-center md:justify-between md:gap-[80px] text-desktopLG text-titleBlue">
                     <a href="/" class="hover:text-mainBlue">Domaines</a>
                     <a href="/challenge" class="hover:text-mainBlue">Défis</a>
+                    {% if app.user %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a href="/myadmin" class="hover:text-mainBlue">MyAdmin</a>
+                    {% endif %}
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <a href="/admin" class="hover:text-mainBlue">Admin</a>
+                    {% endif %}
+                    <a href="/logout" class="hover:text-mainBlue">Déconnexion</a>
+                    {% else %}
+                    <a href="/login" class="hover:text-mainBlue">Connexion</a>
+                    {% endif %}
+
                 </nav>
                 <div id="menu-btn" class="fas fa-bars text-[1.75rem] text-mainBlue hidden cursor-pointer"></div>
             </div>
