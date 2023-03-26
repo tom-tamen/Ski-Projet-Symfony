@@ -6,7 +6,7 @@
     <div class="mx-auto min-h-[68vh] w-4/5 max-w-xl my-10">
     <h1 class="my-9 text-titleBlue text-mobileLG sm:text-desktopLG">Défis</h1>
     {% for challenge in challenges %}
-        <img class="mx-auto w-4/5 aspect-square max-w-xs" src="{{ challenge.imgUrl }}">
+        <img class="mx-auto w-4/5 aspect-square max-w-xs" src="{{ asset('assets/images/challenge/'~challenge.imgUrl) }}">
         <h2 class="my-8 text-mobileBase sm:text-desktopBase text-center">{{ challenge.name }}</h2>
         <p class="text-mobileSM sm:text-desktopSM">{{ challenge.description }}</p>
     {% endfor %}
