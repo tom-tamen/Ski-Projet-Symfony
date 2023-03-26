@@ -37,7 +37,6 @@
     </section>
     <section class="flex flex-col gap-5 md:flex-row justify-between">
         <section class="flex flex-col gap-5" id="slopes-container">
-            <h3 class="text-center font-bold">Pistes</h3>
             {% for slope in station.slopes %}
                 <div class="bg-CustomWhite mx-5 rounded-xl border-b-2 border-mainBlue align-middle flex flex-col py-3 px-3 menu md:min-w-[350px] lg:min-w-[550px] xl:min-w-[750px] 2xl:min-w-[1000px]" onclick="toggleDiv(this)" data-difficulty="{{ slope.difficulty }}">
                     <div class="flex flex-row justify-between">
@@ -156,7 +155,7 @@
                 // Parcourez tous les éléments enfants de l'élément parent
                 Array.from(slopesContainer.children).forEach(function(slopeElement) {
                     // Récupérez le nom de la piste à partir de l'élément
-                    const slopeName = slopeElement.querySelector('h2').innerText.toLowerCase();
+                    const slopeName = slopeElement.querySelector('h2').innerHTML.toLowerCase();
 
                     // Si le nom de la piste contient la valeur de recherche, affichez l'élément, sinon masquez-le
                     if (slopeName.includes(searchValue)) {
