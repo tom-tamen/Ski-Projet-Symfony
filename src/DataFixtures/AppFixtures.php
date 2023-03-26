@@ -28,16 +28,19 @@ class AppFixtures extends Fixture
         foreach(["Espace Diamant","Les 3 vallées"] as $name){
             $domain = new Domain();
             $domain->setName($name);
-            $domain->setImgUrl("https://picsum.photos/200/300");
+            if ($name == "Espace Diamant"){
+                $domain->setImgUrl("logo-espacediamant.png");
+            }else{
+                $domain->setImgUrl("Logo_Les_3_Vallées.png");
+            }
             $manager->persist($domain);
         }
         
 
         $user = new User();
         $user->setEmail("email.admin@gmail.com");
-        $user->setRoles(['ROLE_ADMIN']);
-        $user->setPassword($this->userPasswordHasherInterface->hashPassword(
-                    $user,"admin"));
+        $user->setRoles(['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']);
+        $user->setPassword($this->userPasswordHasherInterface->hashPassword($user,"admin"));
         $manager->persist($user);
         $manager->flush();
 
@@ -45,12 +48,14 @@ class AppFixtures extends Fixture
         $domains = $domainRepository->findAll();
         $x = 0;
         foreach($domains as $domain){
-            
-            foreach(['Les-Saisies', 'Crest-Volant-Cohennoz', 'Notre-Dame-De-Bellecombe', 'Praz-Sur-Arly','Flumet'] as $name){
+
+            foreach(['Les-Saisies', 'Crest-Volant Cohennoz', 'Notre-Dame-De-Bellecombe', 'Praz-Sur-Arly','Flumet'] as $name){
+
                 $user = new User();
                 $user->setEmail($x.$name."@gmail.com");
                 $user->setPassword($this->userPasswordHasherInterface->hashPassword(
                     $user,$x.$name));
+                $user->setRoles(['ROLE_ADMIN']);
                 $manager->persist($user);
                 $station = new Station();
                 $station->setDomain($domain);
