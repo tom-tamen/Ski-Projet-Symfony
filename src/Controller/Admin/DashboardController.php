@@ -9,6 +9,7 @@ use App\Entity\Lift;
 use App\Entity\Slope;
 use App\Entity\Station;
 use App\Entity\User;
+use App\Controller\Admin\StationCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
